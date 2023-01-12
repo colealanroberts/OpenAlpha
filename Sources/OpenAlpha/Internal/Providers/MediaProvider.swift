@@ -11,7 +11,7 @@ import Network
 // MARK: - `MediaProviding` -
 
 /// `MediaProviding` is a protocol that defines a method for asynchronously retrieving an array of `Media` objects from a given IPv4 address.
-/// The method can throw an error if the retrieval fails. Conforming types are expected to provide an implementation for this method.
+/// The method can throw an error if the retrieval fails.
 protocol MediaProviding {
     /// Asynchronously retrieves an array of `Media` objects from the given IPv4 address.
     /// - Parameters:
@@ -41,9 +41,9 @@ final class MediaProvider: MediaProviding {
     
     func media(ip: String) async throws -> [Media] {
         do {
-            let _ = try await DLNA.StartAction(ip: ip).send(session: session)
-            let _ = try await DLNA.GetPushRootAction(ip: ip).send(session: session)
-            let response = try await DLNA.BrowseAction(ip: ip).send(session: session)
+            let _ = try await DLNA.StartAction(ip: ip).request(with: session)
+            let _ = try await DLNA.GetPushRootAction(ip: ip).request(with: session)
+            let response = try await DLNA.BrowseAction(ip: ip).request(with: session)
             let result = try await ResultXMLParser(data: response).parse()
             let items = try await ItemXMLParser(result).parse()
             let media = items.compactMap(Media.init)
@@ -52,7 +52,7 @@ final class MediaProvider: MediaProviding {
                 try await item.fetch()
             }
             
-            _ = try await DLNA.EndAction(ip: ip).send(session: session)
+            _ = try await DLNA.EndAction(ip: ip).request(with: session)
             return media
         } catch {
             throw error

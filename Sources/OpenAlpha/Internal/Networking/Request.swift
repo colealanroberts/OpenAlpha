@@ -44,8 +44,8 @@ extension Request {
 // MARK: - `SOAPRequest+Task` -
 
 extension Request where Response == Data {
-    func send(
-        session: URLSession = .shared
+    func request(
+        with session: URLSession = .shared
     ) async throws -> Response {
         do {
             let (data, response) = try await session.data(for: request)
