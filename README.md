@@ -69,7 +69,7 @@ The following camera models have been confirmed to be compatible with OpenAlpha:
   - [x] [Sony a7 II](https://electronics.sony.com/imaging/interchangeable-lens-cameras/full-frame/p/ilce7m2-b)
 
 > **Note**
-> This is not a complete list, please open a PR with the compatible camera model once confirmed.
+> This is not a complete list, please open a PR with the compatible camera model once confirmed. See the [Confirming Compatibility](https://github.com/colealanroberts/OpenAlpha/wiki/Confirming-Compatibility) Wiki entry.
 
 ## License
 
