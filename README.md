@@ -35,7 +35,7 @@ let hotspot = OpenAlpha.Hotspot(ssid: "DIRECT-SSID:ILCE-7M2", passphrase: "1234a
 
 do {
     let ip = try await oa.connect(to: hotspot)
-    let media = try await oa.media(ip: ip)
+    let media = try await oa.media(from: ip)
     print(media) // [Media]
 } catch {
     fatalError(error.localizedDescription)
@@ -77,4 +77,6 @@ OpenAlpha is licensed under the MIT License. See [LICENSE](https://github.com/co
 
 ## Contact
 
-Cole Roberts <a href="https://twitter.com/intent/user?screen_name=colealan"><img src="https://img.shields.io/badge/@colealan-x?color=08a0e9&logo=twitter&logoColor=white" valign="middle" /></a>
+Cole Roberts
+
+<a href="https://twitter.com/intent/user?screen_name=colealan"><img src="https://img.shields.io/badge/@colealan-x?color=08a0e9&logo=twitter&logoColor=white" valign="middle" /></a>
