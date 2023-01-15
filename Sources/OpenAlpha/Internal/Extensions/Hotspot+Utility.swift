@@ -13,7 +13,7 @@ import NetworkExtension
 // MARK: - `OpenAlphaSDK.Hotspot`
 
 extension OpenAlpha.Hotspot {
-    func fetchCurrent() async throws {
+    func ensureCurrent() async throws {
         do {
             let current = await NEHotspotNetwork.fetchCurrent()
             

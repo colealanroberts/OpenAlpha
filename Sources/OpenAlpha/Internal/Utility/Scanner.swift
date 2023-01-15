@@ -7,6 +7,8 @@
 
 import Foundation
 
+// MARK: - `Scanner+OpenAlpha.Hotspot` -
+
 extension Scanner {
     static func hotspot(from value: String) -> OpenAlpha.Hotspot? {
         let scanner = Scanner(string: value)
