@@ -23,6 +23,7 @@ public final class Media: Fetchable {
     /// An asset suitable for thumbnails
     public let thumbnail: Asset
     
+    /// The type of asset, currently only `.photo` is available
     public let kind: Kind
     
     init(

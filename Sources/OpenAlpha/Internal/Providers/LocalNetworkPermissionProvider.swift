@@ -64,14 +64,14 @@ final class LocalNetworkPermissionProvider: LocalNetworkPermissionProviding {
     
     // MARK: - `Private Properties` -
     
-   private let defaults: UserDefaults
+   private let userDefaults: UserDefaults
     
     // MARK: - `Init` -
     
     init(
-        defaults: UserDefaults
+        userDefaults: UserDefaults
     ) {
-        self.defaults = defaults
+        self.userDefaults = userDefaults
         
         NotificationCenter.default.addObserver(
             self,
@@ -119,7 +119,7 @@ final class LocalNetworkPermissionProvider: LocalNetworkPermissionProviding {
         connection.start(queue: .main)
         
         worker = DispatchWorkItem { [weak self] in
-            self?.defaults.localNetworkAuthorization = true
+            self?.userDefaults.localNetworkAuthorization = true
             
             if connection.state == .ready {
                 self?.statusContinuation?.resume(with: .success(()))

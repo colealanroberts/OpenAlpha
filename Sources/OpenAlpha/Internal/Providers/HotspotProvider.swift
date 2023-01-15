@@ -42,18 +42,8 @@ final class HotspotProvider: HotspotProviding {
     
     func connect(to hotspot: OpenAlpha.Hotspot) async throws -> String {
         let hotspotManager = NEHotspotConfigurationManager()
-        
-        do {
-            try await hotspotManager.apply(
-                .init(
-                    ssid: hotspot.ssid,
-                    passphrase: hotspot.passphrase,
-                    isWEP: false
-                )
-            )
-        } catch {
-            throw error
-        }
+        try await hotspotManager.apply(hotspot)
+        try await hotspot.ensureCurrent()
         
         let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         monitor.start(queue: .global())
@@ -61,19 +51,9 @@ final class HotspotProvider: HotspotProviding {
         monitor.cancel()
         
         if !LocalNetworkPermissionProvider.hasRequestedAuthorization {
-            do {
-                try await localNetworkPermissionProvider?.requestAuthorization(gateway: gateway)
-            } catch {
-                throw error
-            }
+            try await localNetworkPermissionProvider?.requestAuthorization(gateway: gateway)
         } else {
             localNetworkPermissionProvider = nil
-        }
-        
-        do {
-            try await hotspot.fetchCurrent()
-        } catch {
-            throw error
         }
         
         return gateway.ipv4.description
@@ -113,4 +93,13 @@ fileprivate extension NWPathMonitor {
         case emptyGateway
     }
 }
+
+// MARK: - `NEHotspotConfigurationManager+Hotspot` -
+
+extension NEHotspotConfigurationManager {
+    func apply(_ hotspot: OpenAlpha.Hotspot) async throws {
+        try await apply(.init(ssid: hotspot.ssid, passphrase: hotspot.passphrase, isWEP: false))
+    }
+}
+
 #endif

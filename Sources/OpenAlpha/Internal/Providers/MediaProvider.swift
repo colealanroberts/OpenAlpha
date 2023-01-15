@@ -15,10 +15,10 @@ import Network
 protocol MediaProviding {
     /// Asynchronously retrieves an array of `Media` objects from the given IPv4 address.
     /// - Parameters:
-    ///   - ip: The IPv4 address to retrieve media from.
+    ///   - from: The IPv4 address to retrieve media from.
     /// - Returns: An array of `Media` objects.
     /// - Throws: An error if the retrieval fails.
-    func media(ip: String) async throws -> [Media]
+    func media(from ip: String) async throws -> [Media]
 }
 
 // MARK: - `MediaProvider` -
@@ -39,7 +39,7 @@ final class MediaProvider: MediaProviding {
     
     // MARK: - `Public Methods` -
     
-    func media(ip: String) async throws -> [Media] {
+    func media(from ip: String) async throws -> [Media] {
         do {
             let _ = try await DLNA.StartAction(ip: ip).request(with: session)
             let _ = try await DLNA.GetPushRootAction(ip: ip).request(with: session)

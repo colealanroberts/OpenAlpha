@@ -12,17 +12,17 @@ import Foundation
 public protocol OACore: AnyObject {
     /// Asynchronously retrieves an array of `Media` objects from the given IPv4 address.
     /// - Parameters:
-    ///   - ip: The IPv4 address to retrieve media from.
+    ///   - from: The IPv4 address to retrieve media from.
     /// - Returns: An array of `Media` objects.
     /// - Throws: An error if the retrieval fails.
-    func media(ip: String) async throws -> [Media]
+    func media(from ip: String) async throws -> [Media]
 }
 
 public protocol OAHotspotConnectable: AnyObject {
     /// Attempts to connect to a Wi-Fi hotspot with the given SSID and passphrase.
     /// Only available on iOS. On macOS, connect to the DIRECT- Wi-Fi network directly.
     /// - Parameters:
-    ///   - hotspot: The hotspot to connect to.
+    ///   - to: The hotspot to connect to.
     /// - Returns: An IPv4 address as a string.
     /// - Throws: An error if the connection fails.
     func connect(to hotspot: OpenAlpha.Hotspot) async throws -> String
@@ -39,7 +39,6 @@ public final class OpenAlpha {
     // MARK: - `Private Properties` -
     
     private let mediaProvider: MediaProviding
-    private let defaults: UserDefaults
     
     #if os(iOS)
     private let hotspotProvider: HotspotProviding
@@ -49,12 +48,11 @@ public final class OpenAlpha {
     
     public init() {
         self.mediaProvider = MediaProvider(session: .shared)
-        self.defaults = .openAlpha
         
         #if os(iOS)
         self.hotspotProvider = HotspotProvider(
             localNetworkPermissionProvider: LocalNetworkPermissionProvider(
-                defaults: defaults
+                userDefaults: .openAlpha
             )
         )
         #endif
@@ -64,9 +62,9 @@ public final class OpenAlpha {
 // MARK: - `OpenAlpha+OACore` -
 
 extension OpenAlpha: OACore {
-    public func media(ip: String) async throws -> [Media] {
+    public func media(from ip: String) async throws -> [Media] {
         do {
-            return try await mediaProvider.media(ip: ip)
+            return try await mediaProvider.media(from: ip)
         } catch {
             throw error
         }
