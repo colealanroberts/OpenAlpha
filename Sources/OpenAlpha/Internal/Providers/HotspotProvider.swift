@@ -47,7 +47,7 @@ final class HotspotProvider: HotspotProviding {
         
         let monitor = NWPathMonitor(requiredInterfaceType: .wifi)
         monitor.start(queue: .global())
-        let gateway = try await monitor.gateway()
+        let gateway = await monitor.gateway()
         monitor.cancel()
         
         if !LocalNetworkPermissionProvider.hasRequestedAuthorization {
@@ -72,14 +72,10 @@ fileprivate extension HotspotProvider {
 
 fileprivate extension NWPathMonitor {
     /// Returns the first `Gateway` from a `NWEndpoint`
-    func gateway() async throws -> Gateway {
-        try await withCheckedThrowingContinuation { continuation in
+    func gateway() async -> Gateway {
+        await withCheckedContinuation { continuation in
             pathUpdateHandler = { path in
-                guard let first = path.gateways.first else {
-                    continuation.resume(throwing: Error.emptyGateway)
-                    return
-                }
-                
+                guard let first = path.gateways.first else { return }
                 continuation.resume(returning: Gateway(first))
             }
         }
