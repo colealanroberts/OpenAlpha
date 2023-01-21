@@ -21,7 +21,11 @@ let package = Package(
         ),
         .testTarget(
             name: "OpenAlphaTests",
-            dependencies: ["OpenAlpha"]
+            dependencies: ["OpenAlpha"],
+            resources: [
+                .process("Resources/A7M2.xml"),
+                .process("Resources/A7M3.xml")
+            ]
         ),
     ]
 )

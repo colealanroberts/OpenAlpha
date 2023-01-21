@@ -18,10 +18,15 @@ public final class Media: Fetchable {
     public let small: Asset
     
     /// The largest available asset
+    /// - Note: If available, `original` contains the highest-resolution asset
     public let large: Asset
     
-    /// An asset suitable for thumbnails
+    /// The asset suitable for thumbnails
     public let thumbnail: Asset
+    
+    /// The original asset, usually at the highest-resolution
+    /// - Note: This may not be available on all camera models
+    public let original: Asset?
     
     /// The type of asset, currently only `.photo` is available
     public let kind: Kind
@@ -32,6 +37,7 @@ public final class Media: Fetchable {
         self.small = .init(item.resource.small)
         self.large = .init(item.resource.large)
         self.thumbnail = .init(item.resource.thumbnail)
+        self.original = .init(item.resource.original)
         self.kind = .init(item.class)
     }
     
@@ -40,6 +46,10 @@ public final class Media: Fetchable {
             try await small.fetch()
             try await large.fetch()
             try await thumbnail.fetch()
+            
+            if let original {
+                try await original.fetch()
+            }
         } catch {
             throw error
         }

@@ -21,6 +21,11 @@ public final class Asset: Fetchable {
     /// once a transfer completes.
     private var url: String?
     
+    convenience init?(_ url: String?) {
+        guard let url else { return nil }
+        self.init(url)
+    }
+    
     init(
         _ url: String
     ) {

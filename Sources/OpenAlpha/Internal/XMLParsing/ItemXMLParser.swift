@@ -9,6 +9,8 @@ import Foundation
 
 final class ItemXMLParser: BaseXMLParser<[DIDLLite.Item]>, XMLParserDelegate {
     
+    // MARK: - `Private Properties` -
+    
     private var items = [DIDLLite.Item]()
     private var currentItem: DIDLLite.Item?
     private var currentSize: DIDLLite.Resource.Size?
@@ -59,6 +61,8 @@ final class ItemXMLParser: BaseXMLParser<[DIDLLite.Item]>, XMLParserDelegate {
                     currentItem?.resource.large = value
                 case .thumbnail:
                     currentItem?.resource.thumbnail = value
+                case .original:
+                    currentItem?.resource.original = value
                 }
             }
         default:

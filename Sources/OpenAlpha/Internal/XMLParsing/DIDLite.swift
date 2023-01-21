@@ -35,6 +35,7 @@ extension DIDLLite {
         var small: String!
         var large: String!
         var thumbnail: String!
+        var original: String?
     }
 }
 
@@ -45,6 +46,7 @@ extension DIDLLite.Resource {
         case small
         case large
         case thumbnail
+        case original
         
         init(
             value: String
@@ -60,7 +62,7 @@ extension DIDLLite.Resource {
                 self = .thumbnail
                 return
             default:
-                fatalError()
+                self = .original
             }
         }
         
