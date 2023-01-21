@@ -12,10 +12,13 @@ import Foundation
 public protocol OACore: AnyObject {
     /// Asynchronously retrieves an array of `Media` objects from the given IPv4 address.
     /// - Parameters:
+    ///   - sizes: An array of sizes (`Media.Size`) to request, to request all available sizes utilize `media(sizes: Media.Size.all(), ...)`.
+    ///   It's worth noting that `Asset.original` may be a large request, utilizing more battery from the camera. If you prefer to avoid a larger data task,
+    ///   and don't need the high-resolution image, opt to pass in `.large` instead.
     ///   - from: The IPv4 address to retrieve media from.
     /// - Returns: An array of `Media` objects.
     /// - Throws: An error if the retrieval fails.
-    func media(from ip: String) async throws -> [Media]
+    func media(sizes: [Media.Size], from ip: String) async throws -> [Media]
 }
 
 public protocol OAHotspotConnectable: AnyObject {
@@ -62,12 +65,8 @@ public final class OpenAlpha {
 // MARK: - `OpenAlpha+OACore` -
 
 extension OpenAlpha: OACore {
-    public func media(from ip: String) async throws -> [Media] {
-        do {
-            return try await mediaProvider.media(from: ip)
-        } catch {
-            throw error
-        }
+    public func media(sizes: [Media.Size], from ip: String) async throws -> [Media] {
+        try await mediaProvider.media(sizes: sizes, from: ip)
     }
 }
 
