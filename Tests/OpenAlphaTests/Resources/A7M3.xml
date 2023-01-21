@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIDL-Lite
+    xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"
+    xmlns:arib="urn:schemas-arib-or-jp:elements-1-0/"
+    xmlns:av="urn:schemas-sony-com:av"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"
+    xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/">
+    <item id="04_03_0532523776_000015_000012_000001" restricted="1" parentID="03_02_0532523776_000015_000012_000000">
+        <dc:title>_DSC001.JPG</dc:title>
+        <upnp:class>object.item.imageItem.photo</upnp:class>
+        <av:contentType>STILL</av:contentType>
+        <dc:date>2023-01-01T17:51:48</dc:date>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG;DLNA.ORG_CI=1">http://192.168.122.1:60151/LRG__DSC001.JPG?%2104%5f03%5f0532523776%5f000015%5f000012%5f000001%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fLRG%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM;DLNA.ORG_CI=1">http://192.168.122.1:60151/SM__DSC001.JPG?%2104%5f03%5f0532523776%5f000015%5f000012%5f000001%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fSM%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN;DLNA.ORG_CI=1">http://192.168.122.1:60151/TN__DSC001.JPG?%2104%5f03%5f0532523776%5f000015%5f000012%5f000001%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fTN%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+        <res protocolInfo="http-get:*:image/jpeg:*" size="5242880" resolution="6000x4000">http://192.168.122.1:60151/ORG__DSC6968.JPG?%2104%5f03%5f0532523776%5f000015%5f000012%5f000001%21http%2dget%3a%2a%3aimage%2fjpeg%3a%2a%215242880%21%21%21%21</res>
+    </item>
+</DIDL-Lite>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DIDL-Lite
+    xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"
+    xmlns:arib="urn:schemas-arib-or-jp:elements-1-0/"
+    xmlns:av="urn:schemas-sony-com:av\"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dlna="urn:schemas-dlna-org:metadata-1-0/"
+    xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/">
+    <item id="04_02_0445155320_000006_000001_000000" restricted="1" parentID="03_01_0445155320_000006_000000_000000">
+        <dc:title>DSC01559.ARW</dc:title>
+        <upnp:class>object.item.imageItem.photo</upnp:class>
+        <dc:date>2021-04-22T19:03:58</dc:date>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_SM;DLNA.ORG_CI=1\">http://192.168.122.1:60151/SM_DSC01559.ARW?%2104%5f02%5f0445155320%5f000006%5f000001%5f000000%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fSM%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_LRG;DLNA.ORG_CI=1\">http://192.168.122.1:60151/LRG_DSC01559.ARW?%2104%5f02%5f0445155320%5f000006%5f000001%5f000000%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fLRG%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+        <res protocolInfo="http-get:*:image/jpeg:DLNA.ORG_PN=JPEG_TN;DLNA.ORG_CI=1\">http://192.168.122.1:60151/TN_DSC01559.ARW?%2104%5f02%5f0445155320%5f000006%5f000001%5f000000%21http%2dget%3a%2a%3aimage%2fjpeg%3aDLNA%2eORG%5fPN%3dJPEG%5fTN%3bDLNA%2eORG%5fCI%3d1%21%21%21%21%21</res>
+    </item>
+</DIDL-Lite>
