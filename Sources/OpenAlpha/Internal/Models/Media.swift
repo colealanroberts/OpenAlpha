@@ -85,9 +85,13 @@ public extension Media {
         /// - Note: This is used solely for specifying which asset sizes
         /// to retrieve using `OpenAlpha.media(sizes:from:)`
         case thumbnail, small, large, original
-        
-        public static func all() -> [Self] { Size.allCases }
     }
+}
+
+// MARK: - `Array+Media.Size`
+
+public extension Array where Element == Media.Size {
+    static func all() -> Self { Media.Size.allCases }
 }
 
 // MARK: - `Media+Hashable` -
