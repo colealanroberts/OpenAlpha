@@ -9,20 +9,20 @@ import Foundation
 
 // MARK: - `Media` -
 
-public final class Media: Fetchable {
+public final class Media: FetchableSize {
     
     /// An automatically assigned identifier
     public let id = UUID()
     
-    /// The smallest available asset
-    public let small: Asset
+    /// The asset suitable for thumbnails, the smallest available asset
+    public let thumbnail: Asset?
     
-    /// The largest available asset
+    /// The small available asset
+    public let small: Asset?
+    
+    /// The large available asset
     /// - Note: If available, `original` contains the highest-resolution asset
-    public let large: Asset
-    
-    /// The asset suitable for thumbnails
-    public let thumbnail: Asset
+    public let large: Asset?
     
     /// The original asset, usually at the highest-resolution
     /// - Note: This may not be available on all camera models
@@ -34,24 +34,25 @@ public final class Media: Fetchable {
     init(
         _ item: DIDLLite.Item
     ) {
+        self.thumbnail = .init(item.resource.thumbnail)
         self.small = .init(item.resource.small)
         self.large = .init(item.resource.large)
-        self.thumbnail = .init(item.resource.thumbnail)
         self.original = .init(item.resource.original)
         self.kind = .init(item.class)
     }
     
-    func fetch() async throws {
-        do {
-            try await small.fetch()
-            try await large.fetch()
-            try await thumbnail.fetch()
-            
-            if let original {
-                try await original.fetch()
+    func fetch(sizes: [Size]) async throws {
+        for size in sizes {
+            switch size {
+            case .thumbnail:
+                try await thumbnail?.fetch()
+            case .small:
+                try await small?.fetch()
+            case .large:
+                try await large?.fetch()
+            case .original:
+                try await original?.fetch()
             }
-        } catch {
-            throw error
         }
     }
 }
@@ -73,6 +74,19 @@ extension Media {
                 return
             }
         }
+    }
+}
+
+// MARK: - `Media+Size` -
+
+public extension Media {
+    enum Size: CaseIterable {
+        /// Provides a 1:1 mapping for an `Asset` size, e.g. `Asset.large`
+        /// - Note: This is used solely for specifying which asset sizes
+        /// to retrieve using `OpenAlpha.media(sizes:from:)`
+        case thumbnail, small, large, original
+        
+        public static func all() -> [Self] { Size.allCases }
     }
 }
 
