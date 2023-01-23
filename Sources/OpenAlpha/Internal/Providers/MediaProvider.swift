@@ -47,15 +47,23 @@ final class MediaProvider: MediaProviding {
             let result = try await ResultXMLParser(data: response).parse()
             let items = try await ItemXMLParser(result).parse()
             let media = items.compactMap(Media.init)
-            
-            for item in media {
-                try await item.fetch(sizes: sizes)
-            }
-            
+            try await fetch(media, with: sizes)
             _ = try await DLNA.EndAction(ip: ip).request(with: session)
             return media
         } catch {
             throw error
+        }
+    }
+    
+    // MARK: - `Private Methods` -
+    
+    private func fetch(_ media: [Media], with sizes: [Media.Size]) async throws {
+        return try await withThrowingTaskGroup(of: Void.self) { group in
+            for medium in media {
+                group.addTask { try await medium.fetch(sizes: sizes) }
+            }
+            
+            return try await group.waitForAll()
         }
     }
 }

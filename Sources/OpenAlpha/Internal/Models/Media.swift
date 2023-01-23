@@ -1,6 +1,6 @@
 //
 //  Media.swift
-//  
+//
 //
 //  Created by Cole Roberts on 12/28/22.
 //
@@ -42,17 +42,26 @@ public final class Media: FetchableSize {
     }
     
     func fetch(sizes: [Size]) async throws {
-        for size in sizes {
-            switch size {
-            case .thumbnail:
-                try await thumbnail?.fetch()
-            case .small:
-                try await small?.fetch()
-            case .large:
-                try await large?.fetch()
-            case .original:
-                try await original?.fetch()
+        let thumbnail: Asset? = self.thumbnail
+        let small: Asset? = self.small
+        let large: Asset? = self.large
+        let original: Asset? = self.original
+        
+        try await withThrowingTaskGroup(of: Void.self) { group in
+            for size in sizes {
+                switch size {
+                case .thumbnail:
+                    group.addTask { try await thumbnail?.fetch() }
+                case .small:
+                    group.addTask { try await small?.fetch() }
+                case .large:
+                    group.addTask { try await large?.fetch() }
+                case .original:
+                    group.addTask { try await original?.fetch() }
+                }
             }
+            
+            try await group.waitForAll()
         }
     }
 }
