@@ -35,13 +35,19 @@ let hotspot = OpenAlpha.Hotspot(ssid: "DIRECT-SSID:ILCE-7M2", passphrase: "1234a
 
 do {
     let ip = try await oa.connect(to: hotspot)
-    let media = try await oa.media(from: ip)
+    // Specific sizes can be requested using: `[.thumbnail, .small, .large, .original]`.
+    // Additionally, a static helper method `.all()` has been included, 
+    // though one should note the potential battery cost.
+    let media = try await oa.media(sizes: .all(), from: ip)
     print(media) // [Media]
 } catch {
     fatalError(error.localizedDescription)
 }
 
 ```
+> 🔋 Note: Specifying .all() may incur an additional cost if an `Asset.original` resource is available for retrieval. Generally speaking, this data represents the original high-resolution photo, and may be much larger in both resolution and file size than even `.large`. This asset _may_ take longer to retrieve, resulting in additional drain of the camera's battery.
+
+
 ## Working with Hotspots and QR Codes
 You can also create a `Hotspot` object by passing a `String` value, which is useful if you have retrieved a hotspot configuration from a QR code. For information on how to scan and process QR codes, see [this tutorial](https://www.hackingwithswift.com/example-code/media/how-to-scan-a-qr-code).
 
@@ -49,7 +55,7 @@ Internally, this initializer makes use of `Scanner` and attempts to construct a 
 
 ## Accessing Media and Assets
 
-`Media` objects contain three `Asset` properties: `small`, `large`, and `thumbnail`. Each Asset object has a single `data` property, which is a `NSData/Data` object representing a JPEG image. You can use this data to create a `UIImage/NSImage` or similar object:
+`Media` objects contain three `Asset` properties: `small`, `large`, `thumbnail`, and optionally `original` if supported by the camera. Each Asset object has a single `data` property, which is a `NSData/Data` object representing a JPEG image. You can use this data to create a `UIImage/NSImage` or similar object:
 
 ```swift
 
