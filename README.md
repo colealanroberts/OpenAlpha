@@ -45,7 +45,7 @@ do {
 }
 
 ```
-> 🔋 Note: Specifying .all() may incur an additional cost if an `Asset.original` resource is available for retrieval. Generally speaking, this data represents the original high-resolution photo, and may be much larger in both resolution and file size than even `.large`. This asset _may_ take longer to retrieve, resulting in additional drain of the camera's battery.
+> 🔋 Note: Specifying `.all()` may incur an additional cost if an `Asset.original` resource is available for retrieval. Generally speaking, this data represents the original high-resolution photo, and may be much larger in both resolution and file size than even `.large`. This asset _may_ take longer to retrieve, resulting in additional drain of the camera's battery.
 
 
 ## Working with Hotspots and QR Codes
