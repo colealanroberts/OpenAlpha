@@ -13,7 +13,7 @@ A Swift package for retrieving images from Sony digital cameras.
 To install OpenAlpha using Swift Package Manager, add the following dependency to your Package.swift file:
 
 ```swift
-.Package(url: "https://github.com/colealanroberts/OpenAlpha/OpenAlpha.git", majorVersion: 1)
+.package(url: "https://github.com/colealanroberts/OpenAlpha/OpenAlpha.git", majorVersion: 1)
 ```
 Alternatively, you can add OpenAlpha to your project by clicking the "+" button in Xcode's "Swift Packages" menu.
 
