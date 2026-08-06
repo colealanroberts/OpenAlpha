@@ -80,9 +80,3 @@ The following camera models have been confirmed to be compatible with OpenAlpha:
 ## License
 
 OpenAlpha is licensed under the MIT License. See [LICENSE](https://github.com/colealanroberts/OpenAlpha/blob/main/LICENSE) for more information.
-
-## Contact
-
-Cole Roberts
-
-<a href="https://twitter.com/intent/user?screen_name=colealan"><img src="https://img.shields.io/badge/@colealan-x?color=08a0e9&logo=twitter&logoColor=white" valign="middle" /></a>
